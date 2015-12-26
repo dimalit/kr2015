@@ -44,13 +44,13 @@ class GameFrame extends JFrame {
 		
 		JMenuBar mainMenu = new JMenuBar();
 		setJMenuBar(mainMenu);
-		JMenu fileMenu = new JMenu("Файл");
-		JMenu helpMenu = new JMenu("Справка");
-		JMenuItem exitItem = new JMenuItem("Выход");
-		JMenuItem clearItem = new JMenuItem("Новая игра");
+		JMenu fileMenu = new JMenu("File");
+		JMenu helpMenu = new JMenu("Reference");
+		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenuItem clearItem = new JMenuItem("New game");
 		fileMenu.add(exitItem);
 		fileMenu.add(clearItem);
-		JMenuItem aboutItem = new JMenuItem("О программе");
+		JMenuItem aboutItem = new JMenuItem("TicTacToe");
 		helpMenu.add(aboutItem);
 		mainMenu.add(fileMenu);
 		mainMenu.add(helpMenu);
