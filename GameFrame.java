@@ -15,16 +15,14 @@ import tictactoe.common.GameBoard;
  */
 class GameFrame extends JFrame {
 
-	private static final long serialVersionUID = 345435345345435L;
 
-	
 	private  final int BOARD_SIZE = 3;
 
 	private  final int FIELD_WIDTH = 34;
 
 	private  final int WIN_COUNT = 3;
 
-	private final int FRAME_DEFAULT_WIDH = 280;
+	private final int FRAME_DEFAULT_WIDH = 340;
 	private final int FRAME_DEFAULT_HEIGTH = 250;
 
 	
