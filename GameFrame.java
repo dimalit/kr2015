@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import javax.swing.*;
@@ -34,7 +35,8 @@ class GameFrame extends JFrame {
 	private int oCount = 0;
 
 	private GameBoard board;
-
+        private Font font = new Font("TimesRoman", Font.BOLD, 30);  
+       
 	public GameFrame() {
 
 		board = new GameBoard(BOARD_SIZE);
@@ -130,7 +132,8 @@ class GameFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			JButton source = (JButton) e.getSource();
-
+                        source.setFont(font);
+                        
 			
 			if (!board.getItemAt(i, j).equals(BoardItem.UNDEFINED))
 				return;
