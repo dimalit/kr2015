@@ -22,8 +22,8 @@ class GameFrame extends JFrame {
 
 	private  final int WIN_COUNT = 3;
 
-	private final int FRAME_DEFAULT_WIDH = 340;
-	private final int FRAME_DEFAULT_HEIGTH = 250;
+	private final int FRAME_DEFAULT_WIDH = 380;
+	private final int FRAME_DEFAULT_HEIGTH = 320;
 
 	
 	private boolean playerIsX = true;
@@ -48,7 +48,7 @@ class GameFrame extends JFrame {
 		JMenuItem clearItem = new JMenuItem("New game");
 		fileMenu.add(exitItem);
 		fileMenu.add(clearItem);
-		JMenuItem aboutItem = new JMenuItem("TicTacToe");
+		JMenuItem aboutItem = new JMenuItem("About");
 		helpMenu.add(aboutItem);
 		mainMenu.add(fileMenu);
 		mainMenu.add(helpMenu);
