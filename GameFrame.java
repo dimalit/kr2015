@@ -3,11 +3,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.*;
-
 import javax.swing.*;
 import tictactoe.common.BoardItem;
 import tictactoe.common.GameBoard;
-
+import java.util.*;
+import java.text.*;
 /**
  * 
  * @author Серёга.
@@ -42,13 +42,17 @@ class GameFrame extends JFrame {
 		
 		JMenuBar mainMenu = new JMenuBar();
 		setJMenuBar(mainMenu);
-		JMenu fileMenu = new JMenu("File");
-		JMenu helpMenu = new JMenu("Reference");
-		JMenuItem exitItem = new JMenuItem("Exit");
-		JMenuItem clearItem = new JMenuItem("New game");
+		JMenu fileMenu = new JMenu("Файл");
+		JMenu helpMenu = new JMenu("Справка");
+		JMenuItem exitItem = new JMenuItem("Выход");
+		JMenuItem clearItem = new JMenuItem("Новая игра");
+                JMenuItem aboutAccount = new JMenuItem("Счет");
+                JMenuItem aboutTime = new JMenuItem("Текущее время");
+                fileMenu.add(clearItem);
+                fileMenu.add(aboutAccount);
+                fileMenu.add(aboutTime);
 		fileMenu.add(exitItem);
-		fileMenu.add(clearItem);
-		JMenuItem aboutItem = new JMenuItem("About");
+		JMenuItem aboutItem = new JMenuItem("О программе");
 		helpMenu.add(aboutItem);
 		mainMenu.add(fileMenu);
 		mainMenu.add(helpMenu);
@@ -74,10 +78,11 @@ class GameFrame extends JFrame {
 		setContentPane(scrollFrame);
 		pack();
 
-		// события
+		aboutAccount.addActionListener(new AboutCurrnetAccount());
 		exitItem.addActionListener(new ExitActionListener());
 		aboutItem.addActionListener(new AboutActionListener());
 		clearItem.addActionListener(new ClearActionListener());
+                aboutTime.addActionListener(new AboutTime());
 
 		SwingUtilities.updateComponentTreeUI(mainMenu);
 		SwingUtilities.updateComponentTreeUI(gamePanel);
@@ -156,7 +161,7 @@ class GameFrame extends JFrame {
 				renderGameField();
 
 				JOptionPane.showMessageDialog(GameFrame.this, "Победа " + msg
-						+ ", счет " + " - крестики (" + xCount + "): нолики ("
+						+ ", Текущий счет " + " - крестики (" + xCount + "): нолики ("
 						+ oCount + ")", "Победа",
 						JOptionPane.INFORMATION_MESSAGE);
 
@@ -202,11 +207,45 @@ class GameFrame extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 
 			JOptionPane.showMessageDialog(GameFrame.this, "Крестики-нолики "
-					+ BOARD_SIZE + "x" + BOARD_SIZE
+					+ "(" + BOARD_SIZE + "x" + BOARD_SIZE + ")"
+                                        + " v_1.0" + " 2015" 
 					+ ". \nДля победы составьте линию из " + WIN_COUNT
 					+ " крестиков или ноликов.", "О программе",
 					JOptionPane.INFORMATION_MESSAGE);
 
 		}
 	}
+        
+        private class AboutCurrnetAccount implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           JOptionPane.showMessageDialog(GameFrame.this, "Текущий счет " + " - крестики "
+                   + "(" + xCount + "): нолики ("
+			+ oCount + ")", "Текущий счет", JOptionPane.INFORMATION_MESSAGE);
+        }
+       }
+      
+        
+       private class AboutTime implements ActionListener {
+
+        private String getDateTime() {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+        Date date = new Date();
+
+        return dateFormat.format(date);
+
+    }
+               
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(GameFrame.this, getDateTime(),"Время",JOptionPane.INFORMATION_MESSAGE);
+        }
+           
+       }
+        
+        
+        
 }
