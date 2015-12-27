@@ -10,11 +10,9 @@ import java.util.Collection;
  * @author Серёга.
  *
  */
-public class GameBoard implements Serializable {
+public class GameBoard {
 	
-	private static final long serialVersionUID = 143534543543L;
-	
-	private int size;
+        private int size;
 	private BoardItem[][] board;
 	private Collection<Integer[]> winItems;
 
