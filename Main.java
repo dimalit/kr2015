@@ -27,7 +27,7 @@ public class Main
 				
 				GameFrame wnd = new GameFrame();
 				wnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				wnd.setTitle("TicTacToe");
+				wnd.setTitle("Крестики-нолики");
 				wnd.setResizable(false);
 				wnd.setVisible(true);
                                 Toolkit kit = Toolkit.getDefaultToolkit();
