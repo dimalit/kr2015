@@ -8,6 +8,11 @@ import tictactoe.common.BoardItem;
 import tictactoe.common.GameBoard;
 import java.util.*;
 import java.text.*;
+import sun.audio.*;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.stream.FileImageInputStream;
 /**
  * 
  * @author Серёга.
@@ -29,6 +34,8 @@ class GameFrame extends JFrame
         
         private final String playerX = "Player 1: X";
         private final String playerO = "Player 2: O";
+        
+//        private final String nameBGM = "E:\\Music\\Make Me Famous - дискография\\2011 We Know It's Real (Single)\\01 We Know It's Real.mp3";
         
 	private int xCount = 0;
 	private int oCount = 0;
@@ -119,9 +126,6 @@ class GameFrame extends JFrame
 	
 	private class ButtonClickAction extends AbstractAction {
 
-		private static final long serialVersionUID = 1L;
-
-	
 		private int i, j;
 
 		public ButtonClickAction(int i, int j) {
@@ -139,7 +143,6 @@ class GameFrame extends JFrame
 			if (!board.getItemAt(i, j).equals(BoardItem.UNDEFINED))
 				return;
 
-			
 			board.setItemAt(playerIsX ? BoardItem.X : BoardItem.O, i, j);
 			source.setText(board.getItemAt(i, j).getName());
 			source.setEnabled(false);
@@ -166,7 +169,7 @@ class GameFrame extends JFrame
 
 				JOptionPane.showMessageDialog(GameFrame.this, msg + " won"
 						+ "! Score: " + playerX +  "(" + xCount + ")" + "-" + playerO + "("
-						+ oCount + ")", "Победа",
+						+ oCount + ")", "Winner",
 						JOptionPane.INFORMATION_MESSAGE);
                                 
 				clearGamePanel();
@@ -190,6 +193,28 @@ class GameFrame extends JFrame
 			}
 	}
 
+        
+//        private void playMusic()
+//        {
+//           AudioPlayer MGP = AudioPlayer.player;
+//           AudioStream BGM;
+//           AudioData MD;
+//          
+//
+//           ContinuousAudioDataStream loop = null;
+//           
+//            try {
+//                BGM = new AudioStream(new FileInputStream("C:\\Users\\Серега\\Desktop\\1\\We Know It's Real.mp3"));
+//                MD = BGM.getData();
+//                loop = new ContinuousAudioDataStream(MD);
+//            } catch (IOException ex) {
+//                Logger.getLogger(GameFrame.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//           
+//            MGP.start();
+//            
+//        }
+        
 	
 	private class ExitActionListener implements ActionListener {
            
@@ -214,9 +239,22 @@ class GameFrame extends JFrame
 	
 	private class ClearActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			clearGamePanel();
-			xCount = 0;
-			oCount = 0;
+                    
+                  Object arr [] = {"Yes","No"};
+                    
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Start new game?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
+                    
+                  if (answerExit == JOptionPane.YES_OPTION)
+                  {
+                     clearGamePanel();
+		     xCount = 0;
+	             oCount = 0;
+                      
+                  } else if (answerExit == JOptionPane.NO_OPTION)
+                  {
+                      answerExit = JOptionPane.CLOSED_OPTION;
+                  }
+	
 		}
 	}
 
@@ -233,9 +271,9 @@ class GameFrame extends JFrame
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           JOptionPane.showMessageDialog(GameFrame.this, "Текущий счет " + " - крестики "
-                   + "(" + xCount + "): нолики ("
-			+ oCount + ")", "Текущий счет", JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(GameFrame.this, "Score " + " - X "
+                   + "(" + xCount + "): O ("
+			+ oCount + ")", "Score", JOptionPane.INFORMATION_MESSAGE);
            }
        }
       
@@ -246,12 +284,17 @@ class GameFrame extends JFrame
            JOptionPane.showMessageDialog(GameFrame.this, "Your goal is to be the first player to get 3 X's or O's in a\n" +
              "row. (horizontally, diagonally, or vertically)\n" +
                        "Player 1: X\n" + "Player 2: O","Instruction",JOptionPane.INFORMATION_MESSAGE);
-
-            
+             }       
         }
-            
-            
-        }
+        
+        
+//        private class PlayBackGroudMusic implements ActionListener {
+//
+//        public void actionPerformed(ActionEvent e) {
+//            
+//        }
+//            
+//        }
         
         
 //       private class AboutTime implements ActionListener {
