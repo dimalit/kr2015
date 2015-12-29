@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,51 +13,53 @@ import java.text.*;
  * @author Серёга.
  *
  */
-class GameFrame extends JFrame {
-
-
+class GameFrame extends JFrame 
+{
+    
 	private  final int BOARD_SIZE = 3;
-
 	private  final int FIELD_WIDTH = 34;
 
 	private  final int WIN_COUNT = 3;
 
-	private final int FRAME_DEFAULT_WIDH = 380;
-	private final int FRAME_DEFAULT_HEIGTH = 320;
+	private final int FRAME_DEFAULT_WIDH = 360;
+	private final int FRAME_DEFAULT_HEIGTH = 360;
 
-	
 	private boolean playerIsX = true;
 	private JPanel gamePanel;
-
-	
+        
+        private final String playerX = "Player 1: X";
+        private final String playerO = "Player 2: O";
+        
 	private int xCount = 0;
 	private int oCount = 0;
 
 	private GameBoard board;
-        private Font font = new Font("TimesRoman", Font.BOLD, 30);  
+//        private Font font = new Font("TimesRoman", Font.BOLD, 30);  
        
+        
 	public GameFrame() {
 
 		board = new GameBoard(BOARD_SIZE);
 
-		
 		JMenuBar mainMenu = new JMenuBar();
 		setJMenuBar(mainMenu);
-		JMenu fileMenu = new JMenu("Файл");
-		JMenu helpMenu = new JMenu("Справка");
-		JMenuItem exitItem = new JMenuItem("Выход");
-		JMenuItem clearItem = new JMenuItem("Новая игра");
-                JMenuItem aboutAccount = new JMenuItem("Счет");
-                JMenuItem aboutTime = new JMenuItem("Текущее время");
-                fileMenu.add(clearItem);
-                fileMenu.add(aboutAccount);
-                fileMenu.add(aboutTime);
+		JMenu fileMenu = new JMenu("File");
+                JMenu gameMenu = new JMenu("Game");
+		JMenu helpMenu = new JMenu("About");
+		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenuItem clearItem = new JMenuItem("New Game");
+                JMenuItem aboutAccount = new JMenuItem("Score");
+                JMenuItem instruction = new JMenuItem("Instructions");
+                gameMenu.add(clearItem);
+                gameMenu.add(aboutAccount);
 		fileMenu.add(exitItem);
-		JMenuItem aboutItem = new JMenuItem("О программе");
+                helpMenu.add(instruction);
+		JMenuItem aboutItem = new JMenuItem("Tic-Tac-Toe");
 		helpMenu.add(aboutItem);
 		mainMenu.add(fileMenu);
+                mainMenu.add(gameMenu);
 		mainMenu.add(helpMenu);
-
+                
 	
 		gamePanel = new JPanel(new GridLayout(BOARD_SIZE, BOARD_SIZE));
 		
@@ -84,8 +85,8 @@ class GameFrame extends JFrame {
 		exitItem.addActionListener(new ExitActionListener());
 		aboutItem.addActionListener(new AboutActionListener());
 		clearItem.addActionListener(new ClearActionListener());
-                aboutTime.addActionListener(new AboutTime());
-
+                instruction.addActionListener(new AboutInstructions());
+                
 		SwingUtilities.updateComponentTreeUI(mainMenu);
 		SwingUtilities.updateComponentTreeUI(gamePanel);
 	}
@@ -132,7 +133,7 @@ class GameFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			JButton source = (JButton) e.getSource();
-                        source.setFont(font);
+//                        source.setFont(font);
                         
 			
 			if (!board.getItemAt(i, j).equals(BoardItem.UNDEFINED))
@@ -154,20 +155,20 @@ class GameFrame extends JFrame {
 				String msg;
 
 				if (winner.equals(BoardItem.X)) {
-					msg = "крестиков";
+					msg = "Player 1";
 					xCount++;
 				} else {
-					msg = "ноликов";
+					msg = "Player 2";
 					oCount++;
 				}
 
 				renderGameField();
 
-				JOptionPane.showMessageDialog(GameFrame.this, "Победа " + msg
-						+ ", Текущий счет " + " - крестики (" + xCount + "): нолики ("
+				JOptionPane.showMessageDialog(GameFrame.this, msg + " won"
+						+ "! Score: " + playerX +  "(" + xCount + ")" + "-" + playerO + "("
 						+ oCount + ")", "Победа",
 						JOptionPane.INFORMATION_MESSAGE);
-
+                                
 				clearGamePanel();
 
 			}
@@ -191,8 +192,22 @@ class GameFrame extends JFrame {
 
 	
 	private class ExitActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent event) {
-			System.exit(0);
+           
+		public void actionPerformed(ActionEvent event) 
+                {
+                    
+                  Object arr [] = {"Yes","No"};
+                    
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Exit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
+                    
+                  if (answerExit == JOptionPane.YES_OPTION)
+                  {
+                      System.exit(0);
+                  } else if (answerExit == JOptionPane.NO_OPTION)
+                  {
+                      answerExit = JOptionPane.CLOSED_OPTION;
+                  }
+	
 		}
 	}
 
@@ -208,14 +223,9 @@ class GameFrame extends JFrame {
 	
 	private class AboutActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-
-			JOptionPane.showMessageDialog(GameFrame.this, "Крестики-нолики "
-					+ "(" + BOARD_SIZE + "x" + BOARD_SIZE + ")"
-                                        + " v_1.0" + " 2015" 
-					+ ". \nДля победы составьте линию из " + WIN_COUNT
-					+ " крестиков или ноликов.", "О программе",
-					JOptionPane.INFORMATION_MESSAGE);
-
+			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe "
+					+ "(" + "3" + "x" + "3" + ")"
+                                        + " v_1.0" , "About", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
         
@@ -226,28 +236,41 @@ class GameFrame extends JFrame {
            JOptionPane.showMessageDialog(GameFrame.this, "Текущий счет " + " - крестики "
                    + "(" + xCount + "): нолики ("
 			+ oCount + ")", "Текущий счет", JOptionPane.INFORMATION_MESSAGE);
-        }
+           }
        }
       
         
-       private class AboutTime implements ActionListener {
+        private class AboutInstructions implements ActionListener {
 
-        private String getDateTime() {
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
-        Date date = new Date();
-
-        return dateFormat.format(date);
-
-    }
-               
-        @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(GameFrame.this, getDateTime(),"Время",JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(GameFrame.this, "Your goal is to be the first player to get 3 X's or O's in a\n" +
+             "row. (horizontally, diagonally, or vertically)\n" +
+                       "Player 1: X\n" + "Player 2: O","Instruction",JOptionPane.INFORMATION_MESSAGE);
+
+            
         }
-           
-       }
+            
+            
+        }
+        
+        
+//       private class AboutTime implements ActionListener {
+//
+//        private String getDateTime() {
+//
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//
+//        Date date = new Date();
+//
+//        return dateFormat.format(date);
+//
+//    }
+//               
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            JOptionPane.showMessageDialog(GameFrame.this, getDateTime(),"Время",JOptionPane.INFORMATION_MESSAGE);
+//         }   
+//       }
         
         
         
