@@ -19,15 +19,12 @@ public class Main
 			InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
         
-		setNimbusLookAndFeel();
-
-		
+//		setNimbusLookAndFeel();
 		EventQueue.invokeAndWait(new Runnable() {
-			public void run() {
-				
+			public void run() {	
 				GameFrame wnd = new GameFrame();
 				wnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				wnd.setTitle("Крестики-нолики");
+				wnd.setTitle("Tic-Tac-Toe");
 				wnd.setResizable(false);
 				wnd.setVisible(true);
                                 Toolkit kit = Toolkit.getDefaultToolkit();
@@ -40,20 +37,20 @@ public class Main
 
 	}
 
-
-	private static void setNimbusLookAndFeel() {
-	
-		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (Exception e) {
-			System.err.println("Error: " + e.getMessage());
-		}
-	}
+//
+//	private static void setNimbusLookAndFeel() {
+//	
+//		try {
+//			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//				if ("Nimbus".equals(info.getName())) {
+//					UIManager.setLookAndFeel(info.getClassName());
+//					break;
+//				}
+//			}
+//		} catch (Exception e) {
+//			System.err.println("Error: " + e.getMessage());
+//		}
+//	}
 
     
     
