@@ -3,10 +3,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 /**
  *
@@ -19,7 +16,6 @@ public class Main
 			InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
         
-//		setNimbusLookAndFeel();
 		EventQueue.invokeAndWait(new Runnable() {
 			public void run() {	
 				GameFrame wnd = new GameFrame();
@@ -37,22 +33,4 @@ public class Main
 
 	}
 
-//
-//	private static void setNimbusLookAndFeel() {
-//	
-//		try {
-//			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//				if ("Nimbus".equals(info.getName())) {
-//					UIManager.setLookAndFeel(info.getClassName());
-//					break;
-//				}
-//			}
-//		} catch (Exception e) {
-//			System.err.println("Error: " + e.getMessage());
-//		}
-//	}
-
-    
-    
-    
 }
