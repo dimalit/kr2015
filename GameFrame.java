@@ -1,7 +1,4 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import tictactoe.common.BoardItem;
@@ -10,9 +7,9 @@ import java.util.*;
 import java.text.*;
 import sun.audio.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.stream.FileImageInputStream;
+import java.awt.*;
+import javax.swing.*;
 /**
  * 
  * @author Серёга.
@@ -52,22 +49,39 @@ class GameFrame extends JFrame
 		setJMenuBar(mainMenu);
 		JMenu fileMenu = new JMenu("File");
                 JMenu gameMenu = new JMenu("Game");
+                JMenu menuUI = new JMenu("View");
 		JMenu helpMenu = new JMenu("About");
+                 
+                
+                
+                JMenuItem Theme = new JMenu("Look & Feel");
+                JMenuItem itemui1 = new JRadioButtonMenuItem("Windows Look & Feel");
+                JMenuItem itemui2 = new JRadioButtonMenuItem("Metal Look & Feel");
+                JMenuItem itemui3 = new JRadioButtonMenuItem("Motif Look & Feel");
+                ButtonGroup bg = new ButtonGroup();
+                bg.add(itemui1);
+                bg.add(itemui2);
+                bg.add(itemui3);
+                
+                
 		JMenuItem exitItem = new JMenuItem("Exit");
 		JMenuItem clearItem = new JMenuItem("New Game");
                 JMenuItem aboutAccount = new JMenuItem("Score");
                 JMenuItem instruction = new JMenuItem("Instructions");
+                
                 gameMenu.add(clearItem);
                 gameMenu.add(aboutAccount);
 		fileMenu.add(exitItem);
                 helpMenu.add(instruction);
+                
 		JMenuItem aboutItem = new JMenuItem("Tic-Tac-Toe");
 		helpMenu.add(aboutItem);
 		mainMenu.add(fileMenu);
                 mainMenu.add(gameMenu);
+                mainMenu.add(menuUI);
 		mainMenu.add(helpMenu);
                 
-	
+	 
 		gamePanel = new JPanel(new GridLayout(BOARD_SIZE, BOARD_SIZE));
 		
 		JScrollPane scrollFrame = new JScrollPane(gamePanel);
@@ -96,6 +110,16 @@ class GameFrame extends JFrame
                 
 		SwingUtilities.updateComponentTreeUI(mainMenu);
 		SwingUtilities.updateComponentTreeUI(gamePanel);
+                
+                
+                itemui1.addActionListener(new ChangeTheme1());
+                itemui2.addActionListener(new ChangeTheme2()); 
+                itemui3.addActionListener(new ChangeTheme3());
+                
+                menuUI.add(itemui1);
+                menuUI.add(itemui2);
+                menuUI.add(itemui3);
+      
 	}
 
 	
@@ -193,6 +217,33 @@ class GameFrame extends JFrame
 			}
 	}
 
+       
+        private void setLookAndFeel (int type)
+        {
+          
+        String laf= "javax.swing.plaf.metal.MetalLookAndFeel";
+         switch(type)
+                 {
+           case 1: laf = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+                 break;
+           case 2: laf = "javax.swing.plaf.metal.MetalLookAndFeel";
+                 break;
+           case 3: laf = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
+                 break;
+                }
+          try
+            {
+           //Меняем
+        UIManager.setLookAndFeel(laf);
+        //Обновляем
+       SwingUtilities.updateComponentTreeUI(this);
+        }
+       catch(Exception e)
+        {
+       e.printStackTrace();
+            }    
+      }
+        
         
 //        private void playMusic()
 //        {
@@ -286,6 +337,30 @@ class GameFrame extends JFrame
                        "Player 1: X\n" + "Player 2: O","Instruction",JOptionPane.INFORMATION_MESSAGE);
              }       
         }
+        
+        
+        private class ChangeTheme1 implements ActionListener {
+            
+          public void actionPerformed(ActionEvent e) {
+            setLookAndFeel(1);
+          }      
+        }
+        
+          private class ChangeTheme2 implements ActionListener {
+            
+          public void actionPerformed(ActionEvent e) {
+            setLookAndFeel(2);
+          }      
+        }
+        
+          
+          private class ChangeTheme3 implements ActionListener {
+            
+          public void actionPerformed(ActionEvent e) {
+            setLookAndFeel(3);
+          }      
+        }  
+        
         
         
 //        private class PlayBackGroudMusic implements ActionListener {
