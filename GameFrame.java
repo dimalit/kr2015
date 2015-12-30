@@ -32,13 +32,13 @@ class GameFrame extends JFrame
         private final String playerX = "Player 1: X";
         private final String playerO = "Player 2: O";
         
-//        private final String nameBGM = "E:\\Music\\Make Me Famous - дискография\\2011 We Know It's Real (Single)\\01 We Know It's Real.mp3";
+        private final String nameBGM = "";
         
 	private int xCount = 0;
 	private int oCount = 0;
 
 	private GameBoard board;
-//        private Font font = new Font("TimesRoman", Font.BOLD, 30);  
+        private Font font = new Font("TimesRoman", Font.BOLD, 15);  
        
         
 	public GameFrame() {
@@ -161,8 +161,7 @@ class GameFrame extends JFrame
 		public void actionPerformed(ActionEvent e) {
 
 			JButton source = (JButton) e.getSource();
-//                        source.setFont(font);
-                        
+                        source.setFont(font);      
 			
 			if (!board.getItemAt(i, j).equals(BoardItem.UNDEFINED))
 				return;
