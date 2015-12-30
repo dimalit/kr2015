@@ -313,7 +313,7 @@ class GameFrame extends JFrame
 		public void actionPerformed(ActionEvent event) {
 			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe "
 					+ "(" + "3" + "x" + "3" + ")"
-                                        + " v_1.0" , "About", JOptionPane.INFORMATION_MESSAGE);
+                                        + " v_1.3" , "About", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
         
