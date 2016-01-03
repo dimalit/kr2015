@@ -57,6 +57,7 @@ class GameFrame extends JFrame
                 JMenuItem Theme = new JMenu("Look & Feel");
                 JMenuItem itemui1 = new JRadioButtonMenuItem("Windows Look & Feel");
                 JMenuItem itemui2 = new JRadioButtonMenuItem("Metal Look & Feel");
+                itemui2.setSelected(true);
                 JMenuItem itemui3 = new JRadioButtonMenuItem("Motif Look & Feel");
                 ButtonGroup bg = new ButtonGroup();
                 bg.add(itemui1);
@@ -197,7 +198,7 @@ class GameFrame extends JFrame
                                 
 				clearGamePanel();
 
-			}
+			}           
 		}
 	}
 
