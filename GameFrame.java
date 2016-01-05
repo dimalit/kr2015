@@ -20,25 +20,25 @@ class GameFrame extends JFrame
 	private final int FRAME_DEFAULT_HEIGTH = 360;
 
 	private boolean playerIsX = true;
-	private JPanel gamePanel;
+	private final JPanel gamePanel;
         
         private final String playerX = "Player 1: X";
         private final String playerO = "Player 2: O";
-        
-        private final String nameBGM = "";
         
 	private int xCount = 0;
 	private int oCount = 0;
         private int PARITY_X_O = 0;
         
 	private GameBoard board;
-        private Font font = new Font("TimesRoman", Font.BOLD, 15);  
-       
+        private final Font font = new Font("TimesRoman", Font.BOLD, 15);  
+//        private final GameFrame gameframe = new GameFrame();
         
 	public GameFrame() {
 
 		board = new GameBoard(BOARD_SIZE);
 
+         
+                
 		JMenuBar mainMenu = new JMenuBar();
 		setJMenuBar(mainMenu);
 		JMenu fileMenu = new JMenu("File");
@@ -60,10 +60,12 @@ class GameFrame extends JFrame
 		JMenuItem exitItem = new JMenuItem("Exit");
 		JMenuItem clearItem = new JMenuItem("New Game");
                 JMenuItem aboutAccount = new JMenuItem("Score");
+                JMenuItem resetScr = new JMenuItem("Reset score");
                 JMenuItem instruction = new JMenuItem("Instructions");
                 
                 gameMenu.add(clearItem);
                 gameMenu.add(aboutAccount);
+                gameMenu.add(resetScr);
 		fileMenu.add(exitItem);
                 helpMenu.add(instruction);
                 
@@ -97,6 +99,7 @@ class GameFrame extends JFrame
 
 		aboutAccount.addActionListener(new AboutCurrnetAccount());
 		exitItem.addActionListener(new ExitActionListener());
+                resetScr.addActionListener(new ResetScore());
 		aboutItem.addActionListener(new AboutActionListener());
 		clearItem.addActionListener(new ClearActionListener());
                 instruction.addActionListener(new AboutInstructions());
@@ -143,14 +146,14 @@ class GameFrame extends JFrame
 	
 	private class ButtonClickAction extends AbstractAction {
 
-		private int i, j;
+		private final int i, j;
 
 		public ButtonClickAction(int i, int j) {
 			this.i = i;
 			this.j = j;
 		}
 
-		@Override
+                @Override
 		public void actionPerformed(ActionEvent e) {
 
 			JButton source = (JButton) e.getSource();
@@ -198,7 +201,7 @@ class GameFrame extends JFrame
                             
                   Object arr [] = {"Yes","No"};
                     
-                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Parity.Start new game?", "Parity", JOptionPane.YES_NO_OPTION,
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Draw.Start new game?", "Draw", JOptionPane.YES_NO_OPTION,
                                     JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
                     
                   if (answerExit == JOptionPane.YES_OPTION)
@@ -244,12 +247,11 @@ class GameFrame extends JFrame
                 }
           try
             {
-        UIManager.setLookAndFeel(laf);
+       UIManager.setLookAndFeel(laf);
        SwingUtilities.updateComponentTreeUI(this);
         }
-       catch(Exception e)
+       catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
         {
-       e.printStackTrace();
             }    
       }
         
@@ -257,12 +259,13 @@ class GameFrame extends JFrame
 	
 	private class ExitActionListener implements ActionListener {
            
+                @Override
 		public void actionPerformed(ActionEvent event) 
                 {
                     
                   Object arr [] = {"Yes","No"};
                     
-                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Exit?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Are you sure?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
                     
                   if (answerExit == JOptionPane.YES_OPTION)
                   {
@@ -277,20 +280,27 @@ class GameFrame extends JFrame
 
 	
 	private class ClearActionListener implements ActionListener {
+                @Override
 		public void actionPerformed(ActionEvent event) {
-                    
-                  Object arr [] = {"Yes","No"};
-                    
-                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Start new game?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
-                    
+                     
+                  Object[] options = {"Yes, please", "No, thanks.Only start new game", "Cancel"};
+
+                  int answerExit = JOptionPane.showOptionDialog(GameFrame.this, "Would you like to start new game and reset current score?", "Confirm",
+                          JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+                  
                   if (answerExit == JOptionPane.YES_OPTION)
                   {
                      clearGamePanel();
 		     xCount = 0;
 	             oCount = 0;
-                     PARITY_X_O = 0;
-                      
-                  } else if (answerExit == JOptionPane.NO_OPTION)
+                     PARITY_X_O = 0;   
+                  }       
+                  if (answerExit == JOptionPane.NO_OPTION) 
+                  {
+                    clearGamePanel();
+                    PARITY_X_O = 0;
+                  }
+                  if (answerExit == JOptionPane.CANCEL_OPTION)
                   {
                       answerExit = JOptionPane.CLOSED_OPTION;
                   }
@@ -300,18 +310,43 @@ class GameFrame extends JFrame
 
 	
 	private class AboutActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent event) {
-			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe "
-					+ "(" + "3" + "x" + "3" + ")"
-                                        + " v_1.4" , "About", JOptionPane.INFORMATION_MESSAGE);
+                @Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe (3 x 3)  v_1.5",
+                                        "About", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
+        
+        
+        private class ResetScore implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+                  Object options [] = {"Yes","No"};
+                    
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Reset current score?", "Confirm", 
+                          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    
+                  if (answerExit == JOptionPane.YES_OPTION)
+                  {
+		     xCount = 0;
+	             oCount = 0;
+                     PARITY_X_O = 0;
+                      
+                  } else if (answerExit == JOptionPane.NO_OPTION)
+                  {
+                      answerExit = JOptionPane.CLOSED_OPTION;
+                  }
+              }  
+        }
+        
         
         private class AboutCurrnetAccount implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           JOptionPane.showMessageDialog(GameFrame.this, "Score " + " - X "
+           JOptionPane.showMessageDialog(GameFrame.this, "Score - X "
                    + "(" + xCount + "): O ("
 			+ oCount + ")", "Score", JOptionPane.INFORMATION_MESSAGE);
            }
@@ -320,6 +355,7 @@ class GameFrame extends JFrame
         
         private class AboutInstructions implements ActionListener {
 
+        @Override
         public void actionPerformed(ActionEvent e) {
            JOptionPane.showMessageDialog(GameFrame.this, "Your goal is to be the first player to get 3 X's or O's in a\n" +
              "row. (horizontally, diagonally, or vertically)\n" +
@@ -330,6 +366,7 @@ class GameFrame extends JFrame
         
         private class ChangeTheme1 implements ActionListener {
             
+          @Override
           public void actionPerformed(ActionEvent e) {
             setLookAndFeel(1);
           }      
@@ -337,6 +374,7 @@ class GameFrame extends JFrame
         
           private class ChangeTheme2 implements ActionListener {
             
+          @Override
           public void actionPerformed(ActionEvent e) {
             setLookAndFeel(2);
           }      
@@ -345,6 +383,7 @@ class GameFrame extends JFrame
           
           private class ChangeTheme3 implements ActionListener {
             
+          @Override
           public void actionPerformed(ActionEvent e) {
             setLookAndFeel(3);
           }      
