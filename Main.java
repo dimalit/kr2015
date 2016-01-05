@@ -19,7 +19,6 @@ public class Main
 		EventQueue.invokeAndWait(new Runnable() {
 			public void run() {	
 				GameFrame wnd = new GameFrame();
-				wnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				wnd.setTitle("Tic-Tac-Toe");
 				wnd.setResizable(false);
 				wnd.setVisible(true);
