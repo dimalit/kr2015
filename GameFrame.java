@@ -244,9 +244,7 @@ class GameFrame extends JFrame
                 }
           try
             {
-           //Меняем
         UIManager.setLookAndFeel(laf);
-        //Обновляем
        SwingUtilities.updateComponentTreeUI(this);
         }
        catch(Exception e)
@@ -305,7 +303,7 @@ class GameFrame extends JFrame
 		public void actionPerformed(ActionEvent event) {
 			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe "
 					+ "(" + "3" + "x" + "3" + ")"
-                                        + " v_1.3" , "About", JOptionPane.INFORMATION_MESSAGE);
+                                        + " v_1.4" , "About", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
         
