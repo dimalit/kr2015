@@ -3,13 +3,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import tictactoe.common.BoardItem;
 import tictactoe.common.GameBoard;
-import java.util.*;
-import java.text.*;
-import sun.audio.*;
-import java.io.*;
-import javax.imageio.stream.FileImageInputStream;
-import java.awt.*;
-import javax.swing.*;
 /**
  * 
  * @author Серёга.
@@ -36,7 +29,8 @@ class GameFrame extends JFrame
         
 	private int xCount = 0;
 	private int oCount = 0;
-
+        private int PARITY_X_O = 0;
+        
 	private GameBoard board;
         private Font font = new Font("TimesRoman", Font.BOLD, 15);  
        
@@ -51,9 +45,7 @@ class GameFrame extends JFrame
                 JMenu gameMenu = new JMenu("Game");
                 JMenu menuUI = new JMenu("View");
 		JMenu helpMenu = new JMenu("About");
-                 
-                
-                
+                  
                 JMenuItem Theme = new JMenu("Look & Feel");
                 JMenuItem itemui1 = new JRadioButtonMenuItem("Windows Look & Feel");
                 JMenuItem itemui2 = new JRadioButtonMenuItem("Metal Look & Feel");
@@ -170,11 +162,10 @@ class GameFrame extends JFrame
 			board.setItemAt(playerIsX ? BoardItem.X : BoardItem.O, i, j);
 			source.setText(board.getItemAt(i, j).getName());
 			source.setEnabled(false);
-
+                        PARITY_X_O++;
 			
 			playerIsX = !playerIsX;
 
-			
 			BoardItem winner = board.getNextWinner(WIN_COUNT);
 
 			if (winner != null && !winner.equals(BoardItem.UNDEFINED)) {
@@ -190,16 +181,36 @@ class GameFrame extends JFrame
 				}
 
 				renderGameField();
-
+                                
+                                PARITY_X_O = 0; 
+                                
 				JOptionPane.showMessageDialog(GameFrame.this, msg + " won"
 						+ "! Score: " + playerX +  "(" + xCount + ")" + "-" + playerO + "("
 						+ oCount + ")", "Winner",
 						JOptionPane.INFORMATION_MESSAGE);
                                 
 				clearGamePanel();
-
-			}           
-		}
+ 
+			}    else { if (PARITY_X_O == 9) { 
+                            
+                            
+                  PARITY_X_O = 0;          
+                            
+                  Object arr [] = {"Yes","No"};
+                    
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Parity.Start new game?", "Parity", JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
+                    
+                  if (answerExit == JOptionPane.YES_OPTION)
+                  {
+                      clearGamePanel();
+                  } else if (answerExit == JOptionPane.NO_OPTION)
+                  {
+                      answerExit = JOptionPane.CLOSED_OPTION; 
+                   }     
+                  }
+                }       
+            }
 	}
 
 	private void renderGameField() {
@@ -244,28 +255,7 @@ class GameFrame extends JFrame
             }    
       }
         
-        
-//        private void playMusic()
-//        {
-//           AudioPlayer MGP = AudioPlayer.player;
-//           AudioStream BGM;
-//           AudioData MD;
-//          
-//
-//           ContinuousAudioDataStream loop = null;
-//           
-//            try {
-//                BGM = new AudioStream(new FileInputStream("C:\\Users\\Серега\\Desktop\\1\\We Know It's Real.mp3"));
-//                MD = BGM.getData();
-//                loop = new ContinuousAudioDataStream(MD);
-//            } catch (IOException ex) {
-//                Logger.getLogger(GameFrame.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//           
-//            MGP.start();
-//            
-//        }
-        
+                
 	
 	private class ExitActionListener implements ActionListener {
            
@@ -300,6 +290,7 @@ class GameFrame extends JFrame
                      clearGamePanel();
 		     xCount = 0;
 	             oCount = 0;
+                     PARITY_X_O = 0;
                       
                   } else if (answerExit == JOptionPane.NO_OPTION)
                   {
@@ -361,35 +352,5 @@ class GameFrame extends JFrame
           }      
         }  
         
-        
-        
-//        private class PlayBackGroudMusic implements ActionListener {
-//
-//        public void actionPerformed(ActionEvent e) {
-//            
-//        }
-//            
-//        }
-        
-        
-//       private class AboutTime implements ActionListener {
-//
-//        private String getDateTime() {
-//
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//
-//        Date date = new Date();
-//
-//        return dateFormat.format(date);
-//
-//    }
-//               
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            JOptionPane.showMessageDialog(GameFrame.this, getDateTime(),"Время",JOptionPane.INFORMATION_MESSAGE);
-//         }   
-//       }
-        
-        
-        
+     
 }
