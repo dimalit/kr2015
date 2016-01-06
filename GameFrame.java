@@ -27,6 +27,7 @@ class GameFrame extends JFrame
         
 	private int xCount = 0;
 	private int oCount = 0;
+        private int score_draws = 0;
         private int PARITY_X_O = 0;
         
 	private GameBoard board;
@@ -37,8 +38,8 @@ class GameFrame extends JFrame
 
 		board = new GameBoard(BOARD_SIZE);
 
-         
-                
+                setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+                               
 		JMenuBar mainMenu = new JMenuBar();
 		setJMenuBar(mainMenu);
 		JMenu fileMenu = new JMenu("File");
@@ -58,12 +59,10 @@ class GameFrame extends JFrame
                 
                 
 		JMenuItem exitItem = new JMenuItem("Exit");
-		JMenuItem clearItem = new JMenuItem("New Game");
-                JMenuItem aboutAccount = new JMenuItem("Score");
+                JMenuItem aboutAccount = new JMenuItem("Current score");
                 JMenuItem resetScr = new JMenuItem("Reset score");
                 JMenuItem instruction = new JMenuItem("Instructions");
                 
-                gameMenu.add(clearItem);
                 gameMenu.add(aboutAccount);
                 gameMenu.add(resetScr);
 		fileMenu.add(exitItem);
@@ -97,11 +96,10 @@ class GameFrame extends JFrame
 		setContentPane(scrollFrame);
 		pack();
 
-		aboutAccount.addActionListener(new AboutCurrnetAccount());
+		aboutAccount.addActionListener(new AboutCurrentAccount());
 		exitItem.addActionListener(new ExitActionListener());
                 resetScr.addActionListener(new ResetScore());
 		aboutItem.addActionListener(new AboutActionListener());
-		clearItem.addActionListener(new ClearActionListener());
                 instruction.addActionListener(new AboutInstructions());
                 
 		SwingUtilities.updateComponentTreeUI(mainMenu);
@@ -192,25 +190,18 @@ class GameFrame extends JFrame
 						+ oCount + ")", "Winner",
 						JOptionPane.INFORMATION_MESSAGE);
                                 
-				clearGamePanel();
+                                clearGamePanel();
+				
  
 			}    else { if (PARITY_X_O == 9) { 
                             
-                            
-                  PARITY_X_O = 0;          
-                            
-                  Object arr [] = {"Yes","No"};
-                    
-                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Draw.Start new game?", "Draw", JOptionPane.YES_NO_OPTION,
-                                    JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
-                    
-                  if (answerExit == JOptionPane.YES_OPTION)
-                  {
-                      clearGamePanel();
-                  } else if (answerExit == JOptionPane.NO_OPTION)
-                  {
-                      answerExit = JOptionPane.CLOSED_OPTION; 
-                   }     
+                        PARITY_X_O = 0; 
+                        
+                        score_draws++;
+                                        
+                        JOptionPane.showMessageDialog(GameFrame.this,"Draw.Score: " + playerX +  "(" + xCount + ")" + "-" + playerO + "("
+						+ oCount + ") Draws: " + score_draws , "Draw", JOptionPane.INFORMATION_MESSAGE);             
+                        clearGamePanel();                           
                   }
                 }       
             }
@@ -278,41 +269,12 @@ class GameFrame extends JFrame
 		}
 	}
 
-	
-	private class ClearActionListener implements ActionListener {
-                @Override
-		public void actionPerformed(ActionEvent event) {
-                     
-                  Object[] options = {"Yes, please", "No, thanks.Only start new game", "Cancel"};
 
-                  int answerExit = JOptionPane.showOptionDialog(GameFrame.this, "Would you like to start new game and reset current score?", "Confirm",
-                          JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
-                  
-                  if (answerExit == JOptionPane.YES_OPTION)
-                  {
-                     clearGamePanel();
-		     xCount = 0;
-	             oCount = 0;
-                     PARITY_X_O = 0;   
-                  }       
-                  if (answerExit == JOptionPane.NO_OPTION) 
-                  {
-                    clearGamePanel();
-                    PARITY_X_O = 0;
-                  }
-                  if (answerExit == JOptionPane.CANCEL_OPTION)
-                  {
-                      answerExit = JOptionPane.CLOSED_OPTION;
-                  }
-	
-		}
-	}
 
-	
 	private class AboutActionListener implements ActionListener {
                 @Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe (3 x 3)  v_1.5",
+			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe (3 x 3)  v_1.6",
                                         "About", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
@@ -333,6 +295,7 @@ class GameFrame extends JFrame
 		     xCount = 0;
 	             oCount = 0;
                      PARITY_X_O = 0;
+                     score_draws = 0;
                       
                   } else if (answerExit == JOptionPane.NO_OPTION)
                   {
@@ -342,13 +305,13 @@ class GameFrame extends JFrame
         }
         
         
-        private class AboutCurrnetAccount implements ActionListener {
+        private class AboutCurrentAccount implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           JOptionPane.showMessageDialog(GameFrame.this, "Score - X "
-                   + "(" + xCount + "): O ("
-			+ oCount + ")", "Score", JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(GameFrame.this, "Score: X "
+                   + "(" + xCount + "), O ("
+			+ oCount + "), draws: " + score_draws, "Score", JOptionPane.INFORMATION_MESSAGE);
            }
        }
       
