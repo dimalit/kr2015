@@ -23,10 +23,9 @@ public class Main
 			public void run() {	
 		        GameFrame gameframe = new GameFrame();
                                 
-                         gameframe.setDefaultCloseOperation(GameFrame.DO_NOTHING_ON_CLOSE);
                          gameframe.addWindowListener(new WindowAdapter() {
-             @Override
-            public void windowClosing(WindowEvent e) {
+               @Override
+               public void windowClosing(WindowEvent e) {
                 
                 Object options [] = {"Yes","No"};
                                 
