@@ -186,8 +186,8 @@ class GameFrame extends JFrame
                                 PARITY_X_O = 0; 
                                 
 				JOptionPane.showMessageDialog(GameFrame.this, msg + " won"
-						+ "! Score: " + playerX +  "(" + xCount + ")" + "-" + playerO + "("
-						+ oCount + ")", "Winner",
+						+ "! Score: " + playerX +  "(" + xCount + ")" + "," + playerO + "("
+						+ oCount + "), draws: " + score_draws , "Winner",
 						JOptionPane.INFORMATION_MESSAGE);
                                 
                                 clearGamePanel();
@@ -199,8 +199,8 @@ class GameFrame extends JFrame
                         
                         score_draws++;
                                         
-                        JOptionPane.showMessageDialog(GameFrame.this,"Draw.Score: " + playerX +  "(" + xCount + ")" + "-" + playerO + "("
-						+ oCount + ") Draws: " + score_draws , "Draw", JOptionPane.INFORMATION_MESSAGE);             
+                        JOptionPane.showMessageDialog(GameFrame.this,"Draw.Score: " + playerX +  "(" + xCount + ")" + ", " + playerO + "("
+						+ oCount + "), draws: " + score_draws , "Draw", JOptionPane.INFORMATION_MESSAGE);             
                         clearGamePanel();                           
                   }
                 }       
