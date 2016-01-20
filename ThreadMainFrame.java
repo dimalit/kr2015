@@ -1,0 +1,71 @@
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+
+
+/**
+ *
+ * @author Серега
+ */
+public class ThreadMainFrame implements Runnable{
+
+    Thread t;
+   
+    public ThreadMainFrame() {
+      
+    t = new Thread(this);
+    t.start();
+          
+    }
+
+   @Override
+    public void run() {
+      
+    CreateFrame();
+        
+    }
+    
+
+    private void CreateFrame(){
+                 
+               GameFrame gameframe = new GameFrame(); 
+               
+               if (ChoosePlayer.choose == true) {
+                   gameframe.playerIsX = true;
+               } else { if (ChoosePlayer.choose == false)
+                   gameframe.playerIsX = false;
+               }
+               
+               
+               gameframe.addWindowListener(new WindowAdapter() {
+               @Override
+               public void windowClosing(WindowEvent e) {
+                
+                Object options [] = {"Yes","No"};
+                                
+                int answerExit =  JOptionPane.showOptionDialog(gameframe, "Are you sure?", "Exit", 
+                          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    
+                  if (answerExit == JOptionPane.YES_OPTION)
+                  {
+                      System.exit(0);
+                  }
+                 
+            }
+        });
+				gameframe.setTitle("Tic-Tac-Toe");
+				gameframe.setResizable(false);
+                                gameframe.setVisible(true);
+                                Toolkit kit = Toolkit.getDefaultToolkit();
+		                Dimension screen = kit.getScreenSize();
+		                int w = screen.width;
+		                int h = screen.height;
+                                gameframe.setLocation(w / 4, h / 4);
+    }
+}
