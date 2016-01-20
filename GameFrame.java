@@ -19,7 +19,7 @@ class GameFrame extends JFrame
 	private final int FRAME_DEFAULT_WIDH = 360;
 	private final int FRAME_DEFAULT_HEIGTH = 360;
 
-	private boolean playerIsX = true;
+	public boolean playerIsX;
 	private final JPanel gamePanel;
         
         private final String playerX = "Player 1: X";
@@ -32,7 +32,6 @@ class GameFrame extends JFrame
         
 	private GameBoard board;
         private final Font font = new Font("TimesRoman", Font.BOLD, 15);  
-//        private final GameFrame gameframe = new GameFrame();
         
 	public GameFrame() {
 
