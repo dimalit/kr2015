@@ -10,7 +10,6 @@ import tictactoe.common.GameBoard;
  */
 class GameFrame extends JFrame 
 {
-    
 	private  final int BOARD_SIZE = 3;
 	private  final int FIELD_WIDTH = 34;
 
@@ -22,8 +21,8 @@ class GameFrame extends JFrame
 	public boolean playerIsX;
 	private final JPanel gamePanel;
         
-        private final String playerX = "Player 1: X";
-        private final String playerO = "Player 2: O";
+        private final String playerX = "сторона крестиков";
+        private final String playerO = "сторона ноликов";
         
 	private int xCount = 0;
 	private int oCount = 0;
@@ -41,10 +40,10 @@ class GameFrame extends JFrame
                                
 		JMenuBar mainMenu = new JMenuBar();
 		setJMenuBar(mainMenu);
-		JMenu fileMenu = new JMenu("File");
-                JMenu gameMenu = new JMenu("Game");
-                JMenu menuUI = new JMenu("View");
-		JMenu helpMenu = new JMenu("About");
+		JMenu fileMenu = new JMenu("Файл");
+                JMenu gameMenu = new JMenu("Игра");
+                JMenu menuUI = new JMenu("Вид");
+		JMenu helpMenu = new JMenu("Справка");
                   
                 JMenuItem Theme = new JMenu("Look & Feel");
                 JMenuItem itemui1 = new JRadioButtonMenuItem("Windows Look & Feel");
@@ -57,17 +56,15 @@ class GameFrame extends JFrame
                 bg.add(itemui3);
                 
                 
-		JMenuItem exitItem = new JMenuItem("Exit");
-                JMenuItem aboutAccount = new JMenuItem("Current score");
-                JMenuItem resetScr = new JMenuItem("Reset score");
-                JMenuItem instruction = new JMenuItem("Instructions");
+		JMenuItem exitItem = new JMenuItem("Выход");
+                JMenuItem aboutAccount = new JMenuItem("Текущий счет");
+                JMenuItem resetScr = new JMenuItem("Сброс счета");
                 
                 gameMenu.add(aboutAccount);
                 gameMenu.add(resetScr);
 		fileMenu.add(exitItem);
-                helpMenu.add(instruction);
                 
-		JMenuItem aboutItem = new JMenuItem("Tic-Tac-Toe");
+		JMenuItem aboutItem = new JMenuItem("О программе");
 		helpMenu.add(aboutItem);
 		mainMenu.add(fileMenu);
                 mainMenu.add(gameMenu);
@@ -99,7 +96,6 @@ class GameFrame extends JFrame
 		exitItem.addActionListener(new ExitActionListener());
                 resetScr.addActionListener(new ResetScore());
 		aboutItem.addActionListener(new AboutActionListener());
-                instruction.addActionListener(new AboutInstructions());
                 
 		SwingUtilities.updateComponentTreeUI(mainMenu);
 		SwingUtilities.updateComponentTreeUI(gamePanel);
@@ -173,10 +169,10 @@ class GameFrame extends JFrame
 				String msg;
 
 				if (winner.equals(BoardItem.X)) {
-					msg = "Player 1";
+					msg = "Крестики";
 					xCount++;
 				} else {
-					msg = "Player 2";
+					msg = "Нолики";
 					oCount++;
 				}
 
@@ -184,9 +180,9 @@ class GameFrame extends JFrame
                                 
                                 PARITY_X_O = 0; 
                                 
-				JOptionPane.showMessageDialog(GameFrame.this, msg + " won"
-						+ "! Score: " + playerX +  "(" + xCount + ")" + "," + playerO + "("
-						+ oCount + "), draws: " + score_draws , "Winner",
+				JOptionPane.showMessageDialog(GameFrame.this, msg + " победили"
+						+ "! Счет: " + playerX +  "(" + xCount + ")" + ", " + playerO + "("
+						+ oCount + "), ничьих: " + score_draws , " ",
 						JOptionPane.INFORMATION_MESSAGE);
                                 
                                 clearGamePanel();
@@ -198,8 +194,8 @@ class GameFrame extends JFrame
                         
                         score_draws++;
                                         
-                        JOptionPane.showMessageDialog(GameFrame.this,"Draw.Score: " + playerX +  "(" + xCount + ")" + ", " + playerO + "("
-						+ oCount + "), draws: " + score_draws , "Draw", JOptionPane.INFORMATION_MESSAGE);             
+                        JOptionPane.showMessageDialog(GameFrame.this,"Ничья.: " + playerX +  "(" + xCount + ")" + ", " + playerO + "("
+						+ oCount + "), Ничьих: " + score_draws , "Ничья", JOptionPane.INFORMATION_MESSAGE);             
                         clearGamePanel();                           
                   }
                 }       
@@ -225,19 +221,19 @@ class GameFrame extends JFrame
         private void setLookAndFeel (int type)
         {
           
-        String laf= "javax.swing.plaf.metal.MetalLookAndFeel";
+        String nameTheme= "javax.swing.plaf.metal.MetalLookAndFeel";
          switch(type)
                  {
-           case 1: laf = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+           case 1: nameTheme = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
                  break;
-           case 2: laf = "javax.swing.plaf.metal.MetalLookAndFeel";
+           case 2: nameTheme = "javax.swing.plaf.metal.MetalLookAndFeel";
                  break;
-           case 3: laf = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
+           case 3: nameTheme = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
                  break;
                 }
           try
             {
-       UIManager.setLookAndFeel(laf);
+       UIManager.setLookAndFeel(nameTheme);
        SwingUtilities.updateComponentTreeUI(this);
         }
        catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
@@ -255,7 +251,9 @@ class GameFrame extends JFrame
                     
                   Object arr [] = {"Yes","No"};
                     
-                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Are you sure?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, arr, arr[0]);
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Вы уверены?", "Выход", 
+                          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,  
+                                                    null, arr, arr[0]);
                     
                   if (answerExit == JOptionPane.YES_OPTION)
                   {
@@ -273,8 +271,8 @@ class GameFrame extends JFrame
 	private class AboutActionListener implements ActionListener {
                 @Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(GameFrame.this, "Tic-Tac-Toe (3 x 3)  v_1.6",
-                                        "About", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(GameFrame.this, "Крестики-нолики (3x3) 0.1",
+                                        "О программе", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
         
@@ -284,9 +282,9 @@ class GameFrame extends JFrame
         @Override
         public void actionPerformed(ActionEvent e) {
             
-                  Object options [] = {"Yes","No"};
+                  Object options [] = {"Да","Нет"};
                     
-                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Reset current score?", "Confirm", 
+                  int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Сбросить текущий счет?", "Подтверждение выбора", 
                           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                     
                   if (answerExit == JOptionPane.YES_OPTION)
@@ -308,23 +306,12 @@ class GameFrame extends JFrame
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           JOptionPane.showMessageDialog(GameFrame.this, "Score: X "
+           JOptionPane.showMessageDialog(GameFrame.this, "Счет: X "
                    + "(" + xCount + "), O ("
-			+ oCount + "), draws: " + score_draws, "Score", JOptionPane.INFORMATION_MESSAGE);
+			+ oCount + "), ничьих: " + score_draws, "Текущий счет", JOptionPane.INFORMATION_MESSAGE);
            }
        }
-      
-        
-        private class AboutInstructions implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-           JOptionPane.showMessageDialog(GameFrame.this, "Your goal is to be the first player to get 3 X's or O's in a\n" +
-             "row. (horizontally, diagonally, or vertically)\n" +
-                       "Player 1: X\n" + "Player 2: O","Instruction",JOptionPane.INFORMATION_MESSAGE);
-             }       
-        }
-        
         
         private class ChangeTheme1 implements ActionListener {
             
