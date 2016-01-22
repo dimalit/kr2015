@@ -13,7 +13,7 @@ public enum BoardItem
 	X_WIN_FIELD("X"),
 	O_WIN_FIELD("0");
 
-	private String name;
+	private final String name;
 
 	private BoardItem(String name) {
 		this.name = name;
