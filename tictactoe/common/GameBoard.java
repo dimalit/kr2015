@@ -14,7 +14,7 @@ public class GameBoard {
 	
         private int size;
 	private BoardItem[][] board;
-	private Collection<Integer[]> winItems;
+	private final Collection<Integer[]> winItems;
 
 
 	public GameBoard(int size) {
