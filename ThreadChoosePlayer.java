@@ -1,8 +1,6 @@
 
-import com.sun.glass.ui.Cursor;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
@@ -18,18 +16,18 @@ public class ThreadChoosePlayer implements Runnable{
     }
 
     private void CreateChoosePlayerFrame(){
-     ChoosePlayer cp = new ChoosePlayer();
-        
+     ChoosePlayerFrame cpf = new ChoosePlayerFrame(); 
+     Toolkit kit = Toolkit.getDefaultToolkit();
+	Dimension screen = kit.getScreenSize();
+	int w = screen.width;
+	int h = screen.height;
+        cpf.setLocation(w / 4, h / 4);
     } 
 
-    
     @Override
     public void run() {
-        
-    CreateChoosePlayerFrame(); 
-
+        CreateChoosePlayerFrame();
     } 
-
 }    
     
     
