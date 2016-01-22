@@ -41,9 +41,9 @@ public class ThreadMainFrame implements Runnable{
                @Override
                public void windowClosing(WindowEvent e) {
                 
-                Object options [] = {"Yes","No"};
+                Object options [] = {"Да","Нет"};
                                 
-                int answerExit =  JOptionPane.showOptionDialog(gameframe, "Are you sure?", "Exit", 
+                int answerExit =  JOptionPane.showOptionDialog(gameframe, "Вы уверены?", "Выход", 
                           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                     
                   if (answerExit == JOptionPane.YES_OPTION)
@@ -53,7 +53,7 @@ public class ThreadMainFrame implements Runnable{
                  
             }
         });
-				gameframe.setTitle("Tic-Tac-Toe");
+				gameframe.setTitle("Крестики-нолики");
 				gameframe.setResizable(false);
                                 gameframe.setVisible(true);
                                 Toolkit kit = Toolkit.getDefaultToolkit();
