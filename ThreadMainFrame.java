@@ -3,11 +3,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
-
 
 /**
  *
@@ -25,10 +21,8 @@ public class ThreadMainFrame implements Runnable{
     }
 
    @Override
-    public void run() {
-      
-    CreateFrame();
-        
+    public void run() {  
+    CreateFrame();    
     }
     
 
@@ -36,9 +30,9 @@ public class ThreadMainFrame implements Runnable{
                  
                GameFrame gameframe = new GameFrame(); 
                
-               if (ChoosePlayer.choose == true) {
+               if (ChoosePlayerFrame.choose == true) {
                    gameframe.playerIsX = true;
-               } else { if (ChoosePlayer.choose == false)
+               } else { if (ChoosePlayerFrame.choose == false)
                    gameframe.playerIsX = false;
                }
                
