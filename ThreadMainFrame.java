@@ -41,7 +41,7 @@ public class ThreadMainFrame implements Runnable{
                @Override
                public void windowClosing(WindowEvent e) {
                 
-                Object options [] = {"Да","Нет"};
+                Object options [] = {"Пути назад уже нету...","Я должен закончить это дело"};
                                 
                 int answerExit =  JOptionPane.showOptionDialog(gameframe, "Вы уверены?", "Выход", 
                           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
