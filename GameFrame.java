@@ -249,7 +249,7 @@ class GameFrame extends JFrame
 		public void actionPerformed(ActionEvent event) 
                 {
                     
-                  Object arr [] = {"Yes","No"};
+                  Object arr [] = {"Этот мир слишком жестокий для меня","Я доведу это дело до конца"};
                     
                   int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Вы уверены?", "Выход", 
                           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,  
@@ -258,10 +258,7 @@ class GameFrame extends JFrame
                   if (answerExit == JOptionPane.YES_OPTION)
                   {
                       System.exit(0);
-                  } else if (answerExit == JOptionPane.NO_OPTION)
-                  {
-                      answerExit = JOptionPane.CLOSED_OPTION;
-                  }
+                  } 
 	
 		}
 	}
