@@ -1,4 +1,3 @@
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -28,7 +27,7 @@ public class ChoosePlayerFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         label1 = new java.awt.Label();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLocationByPlatform(true);
@@ -121,7 +120,7 @@ public class ChoosePlayerFrame extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {  
             ThreadMainFrame tmf = new ThreadMainFrame();
             choose = false;
-             JOptionPane.showMessageDialog(ChoosePlayerFrame.this, 
+            JOptionPane.showMessageDialog(ChoosePlayerFrame.this, 
                     "Вы выбрали темную сторону (нолики)!", " ",
 						JOptionPane.INFORMATION_MESSAGE);
             setSetVisible(false);
