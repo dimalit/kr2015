@@ -21,8 +21,8 @@ class GameFrame extends JFrame
 	public boolean playerIsX;
 	private final JPanel gamePanel;
         
-        private final String playerX = "сторона крестиков";
-        private final String playerO = "сторона ноликов";
+        private final String playerX = "X";
+        private final String playerO = "O";
         
 	private int xCount = 0;
 	private int oCount = 0;
@@ -194,8 +194,8 @@ class GameFrame extends JFrame
                         
                         score_draws++;
                                         
-                        JOptionPane.showMessageDialog(GameFrame.this,"Ничья.: " + playerX +  "(" + xCount + ")" + ", " + playerO + "("
-						+ oCount + "), Ничьих: " + score_draws , "Ничья", JOptionPane.INFORMATION_MESSAGE);             
+                        JOptionPane.showMessageDialog(GameFrame.this,"Ничья.Счет: " + playerX +  "(" + xCount + ")" + ", " + playerO + "("
+						+ oCount + "), ничьих: " + score_draws , "Ничья", JOptionPane.INFORMATION_MESSAGE);             
                         clearGamePanel();                           
                   }
                 }       
