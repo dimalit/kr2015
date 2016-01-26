@@ -28,9 +28,12 @@ class GameFrame extends JFrame
 	private int oCount = 0;
         private int score_draws = 0;
         private int PARITY_X_O = 0;
+        private int reserve_PARITY_X_O = 0;
         
 	private GameBoard board;
         private final Font font = new Font("TimesRoman", Font.BOLD, 15);  
+        private JButton source;
+        
         
 	public GameFrame() {
 
@@ -149,7 +152,7 @@ class GameFrame extends JFrame
                 @Override
 		public void actionPerformed(ActionEvent e) {
 
-			JButton source = (JButton) e.getSource();
+			source = (JButton) e.getSource();
                         source.setFont(font);      
 			
 			if (!board.getItemAt(i, j).equals(BoardItem.UNDEFINED))
@@ -159,6 +162,7 @@ class GameFrame extends JFrame
 			source.setText(board.getItemAt(i, j).getName());
 			source.setEnabled(false);
                         PARITY_X_O++;
+                        reserve_PARITY_X_O++;
 			
 			playerIsX = !playerIsX;
 
@@ -188,9 +192,10 @@ class GameFrame extends JFrame
                                 clearGamePanel();
 				
  
-			}    else { if (PARITY_X_O == 9) { 
+			}    else { if (PARITY_X_O == 9 | reserve_PARITY_X_O == 9) { 
                             
                         PARITY_X_O = 0; 
+                        reserve_PARITY_X_O = 0;
                         
                         score_draws++;
                                         
