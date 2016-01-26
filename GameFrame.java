@@ -183,6 +183,7 @@ class GameFrame extends JFrame
 				renderGameField();
                                 
                                 PARITY_X_O = 0; 
+                                reserve_PARITY_X_O = 0;
                                 
 				JOptionPane.showMessageDialog(GameFrame.this, msg + " победили"
 						+ "! Счет: " + playerX +  "(" + xCount + ")" + ", " + playerO + "("
