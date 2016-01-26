@@ -32,8 +32,7 @@ class GameFrame extends JFrame
         
 	private GameBoard board;
         private final Font font = new Font("TimesRoman", Font.BOLD, 15);  
-        private JButton source;
-        
+
         
 	public GameFrame() {
 
@@ -53,12 +52,12 @@ class GameFrame extends JFrame
                 JMenuItem itemui2 = new JRadioButtonMenuItem("Metal Look & Feel");
                 itemui2.setSelected(true);
                 JMenuItem itemui3 = new JRadioButtonMenuItem("Motif Look & Feel");
-                ButtonGroup bg = new ButtonGroup();
-                bg.add(itemui1);
-                bg.add(itemui2);
-                bg.add(itemui3);
+                ButtonGroup groupChangesThemeButtons = new ButtonGroup();
+                groupChangesThemeButtons.add(itemui1);
+                groupChangesThemeButtons.add(itemui2);
+                groupChangesThemeButtons.add(itemui3);
                 
-                
+
 		JMenuItem exitItem = new JMenuItem("Выход");
                 JMenuItem aboutAccount = new JMenuItem("Текущий счет");
                 JMenuItem resetScr = new JMenuItem("Сброс счета");
@@ -110,8 +109,7 @@ class GameFrame extends JFrame
                 
                 menuUI.add(itemui1);
                 menuUI.add(itemui2);
-                menuUI.add(itemui3);
-      
+                menuUI.add(itemui3);       
 	}
 
 	
@@ -152,7 +150,7 @@ class GameFrame extends JFrame
                 @Override
 		public void actionPerformed(ActionEvent e) {
 
-			source = (JButton) e.getSource();
+			JButton source = (JButton) e.getSource();
                         source.setFont(font);      
 			
 			if (!board.getItemAt(i, j).equals(BoardItem.UNDEFINED))
@@ -340,6 +338,5 @@ class GameFrame extends JFrame
             setLookAndFeel(3);
           }      
         }  
-        
-     
+   
 }
