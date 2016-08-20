@@ -1,3 +1,5 @@
+package graphic;
+
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -41,7 +43,7 @@ public class ThreadMainFrame implements Runnable{
                @Override
                public void windowClosing(WindowEvent e) {
                 
-                Object options [] = {"Пути назад уже нету...","Я должен закончить это дело"};
+                Object options [] = {"Да","Нет"};
                                 
                 int answerExit =  JOptionPane.showOptionDialog(gameframe, "Вы уверены?", "Выход", 
                           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -53,7 +55,6 @@ public class ThreadMainFrame implements Runnable{
                  
             }
         });
-				gameframe.setTitle("Крестики-нолики");
 				gameframe.setResizable(false);
                                 gameframe.setVisible(true);
                                 Toolkit kit = Toolkit.getDefaultToolkit();

@@ -1,8 +1,9 @@
+package graphic;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import tictactoe.common.BoardItem;
-import tictactoe.common.GameBoard;
+import logic.*;
 /**
  * 
  * @author Серёга.
@@ -253,7 +254,7 @@ class GameFrame extends JFrame
 		public void actionPerformed(ActionEvent event) 
                 {
                     
-                  Object arr [] = {"Этот мир слишком жестокий для меня","Я доведу это дело до конца"};
+                  Object arr [] = {"Да","Нет"};
                     
                   int answerExit =  JOptionPane.showOptionDialog(GameFrame.this, "Вы уверены?", "Выход", 
                           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,  
@@ -272,7 +273,7 @@ class GameFrame extends JFrame
 	private class AboutActionListener implements ActionListener {
                 @Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(GameFrame.this, "Крестики-нолики (3x3) 0.1",
+			JOptionPane.showMessageDialog(GameFrame.this, "Крестики-нолики v.1.0",
                                         "О программе", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

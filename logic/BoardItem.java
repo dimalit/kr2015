@@ -1,5 +1,5 @@
 
-package tictactoe.common;
+package logic;
 
 /**
  *

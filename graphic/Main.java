@@ -1,4 +1,4 @@
-
+package graphic;
 /**
  *
  * @author Серега

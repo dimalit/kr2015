@@ -1,11 +1,11 @@
 
+import graphic.ThreadMainFrame;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +24,6 @@ public class ChoosePlayer extends JFrame {
 
     public static boolean choose;
     
-    private final String pathPicture = "res\\pic\\morpheus.jpg";
     
     public ChoosePlayer() throws HeadlessException {
         
@@ -52,9 +51,7 @@ public class ChoosePlayer extends JFrame {
         JLabel picture = new JLabel();
         picture.setHorizontalAlignment(SwingConstants.CENTER);
         add(picture);
-        picture.setIcon(new ImageIcon(pathPicture));
         
-//        pack();
         
         ListenChange();
         setSetVisible(vision);
